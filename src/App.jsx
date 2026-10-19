@@ -27,37 +27,40 @@ const parts = [
     id: 1,
     title: 'فحمات فرامل أمامية',
     english: 'Front brake pads · Toyota OEM ref. 04465-33471',
+    fitmentMake: 'تويوتا',
     code: '04465-33471',
     category: 'الفرامل والسلامة',
     price: 310,
     icon: Disc3,
     tone: 'coral',
     image: makePartPlaceholder('Front Brake Pads'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 2,
     title: 'فحمات فرامل خلفية',
     english: 'Rear brake pads · Motorcraft BRF-1303',
+    fitmentMake: 'فورد',
     code: 'BRF-1303',
     category: 'الفرامل والسلامة',
     price: 265,
     icon: Disc3,
     tone: 'coral',
     image: makePartPlaceholder('Rear Brake Pads'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 3,
     title: 'أقراص فرامل أمامية',
     english: 'Front brake rotors · Toyota OEM ref. 43512-06190',
+    fitmentMake: 'تويوتا',
     code: '43512-06190',
     category: 'الفرامل والسلامة',
     price: 460,
     icon: Disc3,
     tone: 'coral',
     image: makePartPlaceholder('Front Brake Rotors'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 4,
@@ -69,7 +72,7 @@ const parts = [
     icon: Disc3,
     tone: 'green',
     image: makePartPlaceholder('Front Shock Absorber'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 5,
@@ -81,7 +84,7 @@ const parts = [
     icon: Disc3,
     tone: 'green',
     image: makePartPlaceholder('Front Control Arm'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 6,
@@ -93,43 +96,46 @@ const parts = [
     icon: Disc3,
     tone: 'green',
     image: makePartPlaceholder('Outer Tie Rod End'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 7,
     title: 'فلتر زيت المحرك',
     english: 'Engine oil filter · Toyota OEM 04152-YZZA1',
+    fitmentMake: 'تويوتا',
     code: '04152-YZZA1',
     category: 'المحرك والصيانة',
     price: 55,
     icon: Droplets,
     tone: 'blue',
     image: makePartPlaceholder('Engine Oil Filter'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 8,
     title: 'فلتر هواء المحرك',
     english: 'Engine air filter · Toyota OEM 17801-0H010',
+    fitmentMake: 'تويوتا',
     code: '17801-0H010',
     category: 'المحرك والصيانة',
     price: 95,
     icon: Wind,
     tone: 'blue',
     image: makePartPlaceholder('Engine Air Filter'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 9,
     title: 'فلتر هواء المكيف',
     english: 'Cabin air filter · Toyota OEM 87139-06080',
+    fitmentMake: 'تويوتا',
     code: '87139-06080',
     category: 'المحرك والصيانة',
     price: 75,
     icon: Wind,
     tone: 'blue',
     image: makePartPlaceholder('Cabin Air Filter'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 10,
@@ -141,19 +147,20 @@ const parts = [
     icon: Zap,
     tone: 'yellow',
     image: makePartPlaceholder('Iridium Spark Plugs'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 11,
     title: 'ملف إشعال (كويل)',
     english: 'Ignition coil · DENSO OEM ref. 90919-02252',
+    fitmentMake: 'تويوتا',
     code: '90919-02252',
     category: 'المحرك والصيانة',
     price: 325,
     icon: Zap,
     tone: 'yellow',
     image: makePartPlaceholder('Ignition Coil'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 12,
@@ -165,7 +172,7 @@ const parts = [
     icon: Disc3,
     tone: 'yellow',
     image: makePartPlaceholder('Timing Belt Kit'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 13,
@@ -177,7 +184,7 @@ const parts = [
     icon: Droplets,
     tone: 'blue',
     image: makePartPlaceholder('Engine Water Pump'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 14,
@@ -189,7 +196,7 @@ const parts = [
     icon: Droplets,
     tone: 'blue',
     image: makePartPlaceholder('Engine Radiator'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 15,
@@ -201,7 +208,7 @@ const parts = [
     icon: Zap,
     tone: 'yellow',
     image: makePartPlaceholder('Alternator'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 16,
@@ -213,7 +220,7 @@ const parts = [
     icon: Zap,
     tone: 'yellow',
     image: makePartPlaceholder('Oxygen Sensor'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
   {
     id: 17,
@@ -225,7 +232,7 @@ const parts = [
     icon: Wind,
     tone: 'yellow',
     image: makePartPlaceholder('Mass Air Flow Sensor'),
-    stock: 'تحقق من التوافق',
+    stock: 'توافق تجريبي',
   },
 ]
 
@@ -238,6 +245,36 @@ const categories = [
 ]
 const availableMakes = [...new Set(mockFitments.map((fitment) => fitment.make))]
 const formatNumber = (value) => new Intl.NumberFormat('ar-SA').format(value)
+const knownPartIds = new Set(parts.map((part) => part.id))
+const fitmentPaths = new Set()
+const mappedPartIds = new Set()
+
+for (const fitment of mockFitments) {
+  const path = `${fitment.make}|${fitment.model}|${fitment.year}`
+  if (fitmentPaths.has(path)) {
+    throw new Error(`Duplicate mock vehicle fitment: ${path}`)
+  }
+  fitmentPaths.add(path)
+
+  const partIdsForVehicle = new Set()
+  for (const partId of fitment.partIds) {
+    const part = parts.find((item) => item.id === partId)
+    if (!knownPartIds.has(partId) || partIdsForVehicle.has(partId)) {
+      throw new Error(`Invalid or duplicate part ID ${partId} for mock fitment ${path}`)
+    }
+    if (part.fitmentMake && part.fitmentMake !== fitment.make) {
+      throw new Error(`Part ${partId} is assigned to an incompatible mock make: ${path}`)
+    }
+    partIdsForVehicle.add(partId)
+    mappedPartIds.add(partId)
+  }
+}
+
+for (const part of parts) {
+  if (!mappedPartIds.has(part.id)) {
+    throw new Error(`Part ${part.id} is missing a mock vehicle fitment`)
+  }
+}
 
 function App() {
   const [brand, setBrand] = useState('')
@@ -247,7 +284,7 @@ function App() {
   const [query, setQuery] = useState('')
   const [selectedPart, setSelectedPart] = useState(null)
   const [submitted, setSubmitted] = useState(false)
-  const [whatsappUrl, setWhatsappUrl] = useState('')
+  const [demoMessage, setDemoMessage] = useState('')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [resultsVisible, setResultsVisible] = useState(false)
   const [activeFitment, setActiveFitment] = useState(null)
@@ -257,6 +294,7 @@ function App() {
   const availableYears = mockFitments
     .filter((fitment) => fitment.make === brand && fitment.model === model)
     .map((fitment) => fitment.year)
+    .sort((left, right) => Number(right) - Number(left))
   const selectedFitment = mockFitments.find(
     (fitment) => fitment.make === brand && fitment.model === model && fitment.year === year,
   )
@@ -296,7 +334,7 @@ function App() {
   const openRequest = (part) => {
     setSelectedPart(part)
     setSubmitted(false)
-    setWhatsappUrl('')
+    setDemoMessage('')
   }
 
   const searchParts = (event) => {
@@ -313,32 +351,17 @@ function App() {
     document.getElementById('vehicle-picker')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const sendOrderRequest = (event) => {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
+  const createDemoRequest = () => {
     const message = [
-      'طلب قطعة غيار جديدة - رِفد',
-      '',
-      'بيانات العميل',
-      `الاسم: ${formData.get('name')}`,
-      `رقم الجوال: ${formData.get('phone')}`,
-      `المدينة: ${formData.get('city')}`,
-      `العنوان بالتفصيل: ${formData.get('address')}`,
-      `ملاحظات: ${formData.get('notes') || 'غير مذكورة'}`,
-      `رابط الموقع: ${formData.get('locationLink') || 'غير مرفق'}`,
-      '',
-      'تفاصيل السيارة والقطعة',
+      'رسالة توضيحية تجريبية - غير صالحة للشراء',
       `الشركة / النوع / سنة الصنع: ${activeFitment.make} / ${activeFitment.model} / ${activeFitment.year}`,
-      'تنبيه: هذا سجل توافق تجريبي غير موثق ولا يؤكد الملاءمة الفعلية.',
+      'تنبيه: بيانات القطعة والتوافق تجريبية وغير موثقة، ولا تؤكد الملاءمة أو صلاحية الشراء.',
       `اسم القطعة: ${selectedPart.title}`,
       `رقم القطعة: ${selectedPart.code}`,
-      `السعر الاسترشادي: ${formatNumber(selectedPart.price)} ر.س`,
+      `السعر التوضيحي: ${formatNumber(selectedPart.price)} ر.س`,
     ].join('\n')
-    const url = `https://wa.me/966582970043?text=${encodeURIComponent(message)}`
-
-    setWhatsappUrl(url)
+    setDemoMessage(message)
     setSubmitted(true)
-    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -346,7 +369,7 @@ function App() {
       <div className="utility-bar">
         <div className="page-width utility-content">
           <span><MapPin size={14} /> الشحن إلى جميع مناطق المملكة</span>
-          <span>قطع أصلية لسيارتك</span>
+          <span>كتالوج تجريبي لقطع السيارات</span>
           <a href="tel:+966582970043"><Phone size={14} /> +966 58 297 0043</a>
         </div>
       </div>
@@ -447,7 +470,7 @@ function App() {
               <div className="category-tabs" role="tablist" aria-label="تصنيف القطع">
                 {categories.map((item) => <button type="button" role="tab" aria-selected={category === item} className={category === item ? 'category-tab active' : 'category-tab'} key={item} onClick={() => setCategory(item)}>{item}</button>)}
               </div>
-              <span className="results-label">أسعار استرشادية بالريال السعودي</span>
+              <span className="results-label">أسعار تجريبية بالريال السعودي</span>
             </div>
 
             <div className="parts-list">
@@ -473,14 +496,14 @@ function App() {
                     <span className="part-code">رقم القطعة <b>{part.code}</b></span>
                     <span className="stock-status"><span />{part.stock}</span>
                     <div className="part-price"><b>{formatNumber(part.price)}</b><span>ر.س</span></div>
-                    <button type="button" className="request-button" onClick={() => openRequest(part)}>اطلب القطعة <ArrowLeft size={16} /></button>
+                    <button type="button" className="request-button" onClick={() => openRequest(part)}>تفاصيل تجريبية <ArrowLeft size={16} /></button>
                   </article>
                 )
               }) : (
                 <div className="empty-state"><Search size={22} /><b>ما لقينا قطع بهذا الاسم</b><span>جرّب كلمة ثانية أو اختر تصنيفاً مختلفاً</span></div>
               )}
             </div>
-            <p className="catalog-footnote">الأسعار وأرقام القطع استرشادية؛ يُرجى تأكيد السعر والتوافق حسب الموديل والفئة ورقم الهيكل.</p>
+            <p className="catalog-footnote">المنتجات والأسعار والتوافقات هنا بيانات تجريبية فقط؛ يلزم الرجوع إلى كتالوج موثوق ورقم الهيكل قبل أي شراء.</p>
           </div>
         </section>
         )}
@@ -488,18 +511,18 @@ function App() {
         <section className="hero-section">
           <div className="page-width hero-content">
             <div className="hero-copy">
-              <p className="eyebrow"><span /> قطع أصلية، أقرب إليك</p>
+              <p className="eyebrow"><span /> بيانات تجريبية لتجربة المتجر</p>
               <h1>قطعة سيارتك<br /><em>على الطريق.</em></h1>
-              <p className="hero-description">نوفر لك قطع غيار أصلية، ونوصلها لباب بيتك في كل أنحاء السعودية.</p>
+              <p className="hero-description">استعرض تجربة كتالوج قطع تجريبي؛ بيانات التوافق المعروضة للتوضيح ولا تمثل ملاءمة مؤكدة.</p>
               <a className="hero-link" href="#vehicle-picker">اختر سيارتك <ArrowLeft size={17} /></a>
-              <div className="hero-proof"><ShieldCheck size={17} /><span>قطع مضمونة <i /> شحن موثوق داخل المملكة</span></div>
+              <div className="hero-proof"><ShieldCheck size={17} /><span>بيانات توضيحية <i /> غير صالحة لتأكيد الشراء</span></div>
             </div>
             <div className="hero-visual">
               <img
                 src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1400&q=85"
                 alt="فني سيارات يفحص محرك سيارة في ورشة"
               />
-              <div className="image-caption"><span className="caption-mark"><Check size={15} /></span><span><b>قطع أصلية</b><small>اختيار يليق بسيارتك</small></span></div>
+              <div className="image-caption"><span className="caption-mark"><Check size={15} /></span><span><b>عرض تجريبي</b><small>اختيار السيارة ثم التصفية</small></span></div>
               <span className="image-index">01 <i /> 04</span>
             </div>
           </div>
@@ -508,9 +531,9 @@ function App() {
 
         <section className="trust-strip" id="why-us">
           <div className="page-width trust-content">
-            <div><ShieldCheck size={21} /><span><b>قطع موثوقة</b><small>جودة نحرص عليها</small></span></div>
-            <div><Truck size={22} /><span><b>نوصل لبابك</b><small>في جميع مناطق المملكة</small></span></div>
-            <div><Phone size={20} /><span><b>نساعدك تختار</b><small>فريقنا معك قبل الطلب</small></span></div>
+            <div><ShieldCheck size={21} /><span><b>بيانات تجريبية</b><small>ليست تأكيدًا للتوافق</small></span></div>
+            <div><Truck size={22} /><span><b>بيانات متنوعة</b><small>مركبات من عدة شركات</small></span></div>
+            <div><Phone size={20} /><span><b>تصفية دقيقة</b><small>حسب الشركة والنوع والسنة</small></span></div>
             <a href="tel:+966582970043">تحتاج مساعدة؟ <b>اتصل بنا <ArrowLeft size={15} /></b></a>
           </div>
         </section>
@@ -518,7 +541,7 @@ function App() {
 
       <footer className="site-footer" id="contact">
         <div className="page-width">
-          <span className="footer-brand">رِفد <i>·</i> قطع أمريكية لسيارتك</span>
+          <span className="footer-brand">قطع غيار السيارات <i>·</i> كتالوج تجريبي</span>
           <div className="footer-support">
             <span>للدعم والاستفسارات</span>
             <a href="https://wa.me/966582970043" target="_blank" rel="noreferrer"><Phone size={14} /> واتساب <bdi dir="ltr">+966 58 297 0043</bdi></a>
@@ -531,24 +554,17 @@ function App() {
           <section className="request-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
             <button type="button" className="modal-close icon-button" aria-label="إغلاق" onClick={() => setSelectedPart(null)}><X size={20} /></button>
             {submitted ? (
-              <div className="success-state"><span className="success-icon"><Check size={28} /></span><p className="eyebrow section-eyebrow">تم تجهيز طلبك</p><h2 id="modal-title">طلبك جاهز في واتساب</h2><p>فتحنا محادثة مع رِفد برسالة طلبك. راجع التفاصيل في واتساب واضغط إرسال لإكمال الطلب.</p><a className="find-parts-button" href={whatsappUrl} target="_blank" rel="noreferrer">فتح واتساب لإرسال الطلب <ArrowLeft size={17} /></a><button type="button" className="success-return" onClick={() => setSelectedPart(null)}>العودة إلى القطع</button></div>
+              <div className="success-state"><span className="success-icon"><Check size={28} /></span><p className="eyebrow section-eyebrow">تم إعداد بيانات تجريبية</p><h2 id="modal-title">تفاصيل توضيحية</h2><p>البيانات والقطعة تجريبية وغير صالحة لتأكيد التوافق أو الشراء.</p><pre className="demo-message">{demoMessage}</pre><button type="button" className="success-return" onClick={() => setSelectedPart(null)}>العودة إلى القطع</button></div>
             ) : (
               <>
                 <p className="eyebrow section-eyebrow">طلب قطعة تجريبية <span /></p>
-                <h2 id="modal-title">خلّنا نرتب طلبك</h2>
-                <p className="modal-intro">سجّل بياناتك ونتواصل معك لتأكيد التوفر والتوصيل.</p>
+                <h2 id="modal-title">بيانات طلب تجريبي</h2>
+                <p className="modal-intro">هذا نموذج توضيحي فقط، ولا ينشئ طلب شراء حقيقيًا.</p>
                 <p className="mock-fitment-notice" role="note">بيانات التوافق في هذا الموقع تجريبية وغير موثقة. لا تعتمد عليها لتأكيد شراء أو ملاءمة القطعة.</p>
                 <div className="modal-part"><span className={`part-art ${selectedPart.tone}`}><selectedPart.icon size={24} /></span><span><b>{selectedPart.title}</b><small>{activeFitment.make} {activeFitment.model} {activeFitment.year} · {formatNumber(selectedPart.price)} ر.س</small></span></div>
-                <form className="request-form" onSubmit={sendOrderRequest}>
-                  <label>الاسم الكامل<input name="name" autoComplete="name" placeholder="الاسم الكامل" required /></label>
-                  <label>رقم الجوال<input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="05xxxxxxxx" pattern="[0-9+٠-٩\s\-]{8,15}" required /></label>
-                  <label>المدينة<input name="city" autoComplete="address-level2" placeholder="مثال: الرياض" required /></label>
-                  <label>العنوان بالتفصيل<textarea name="address" autoComplete="street-address" placeholder="رقم المبنى أو المنزل والحي" rows="2" required /></label>
-                  <label>ملاحظات (اختياري)<textarea name="notes" placeholder="أي تفاصيل إضافية" rows="2" /></label>
-                  <label>رابط الموقع أو خرائط Google (اختياري)<input name="locationLink" type="url" placeholder="https://maps.google.com/..." /></label>
-                  <button type="submit" className="submit-request">إرسال طلبك <ArrowLeft size={17} /></button>
-                </form>
-                <p className="privacy-note"><ShieldCheck size={14} /> بياناتك تستخدم للتواصل حول هذا الطلب فقط</p>
+                <div className="request-form">
+                  <button type="button" className="submit-request" onClick={createDemoRequest}>عرض تفاصيل تجريبية <ArrowLeft size={17} /></button>
+                </div>
               </>
             )}
           </section>

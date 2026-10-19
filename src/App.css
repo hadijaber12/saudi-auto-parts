@@ -1035,6 +1035,18 @@
   line-height: 1.8;
 }
 
+.demo-message {
+  margin: 16px 0 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: #f8f9f6;
+  color: var(--ink);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
 .request-modal .mock-fitment-notice {
   margin: 11px 0 0;
   font-size: 10px;
