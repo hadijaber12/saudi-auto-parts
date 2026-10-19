@@ -16,16 +16,8 @@ import {
   X,
   Zap,
 } from 'lucide-react'
+import { mockFitments } from './mockFitments'
 import './App.css'
-
-const modelsByBrand = {
-  تويوتا: ['كامري', 'هايلكس', 'لاندكروزر', 'كورولا', 'برادو', 'فورتشنر', 'إف جي كروزر'],
-  فورد: ['تورس', 'إف 150', 'إكسبلورر', 'إكسبيديشن', 'كراون فكتوريا'],
-  'جي إم سي': ['يوكن', 'سييرا'],
-  شفروليه: ['تاهو', 'سيلفرادو', 'سوبربان', 'كابرس'],
-  جيب: ['جراند شيروكي', 'رانجلر'],
-  نيسان: ['باترول', 'التيما', 'ماكسيما'],
-}
 
 const makePartPlaceholder = (label) =>
   `https://placehold.co/480x360/f1f3ee/294f3d/png?text=${encodeURIComponent(label)}`
@@ -244,19 +236,30 @@ const categories = [
   'المحرك والصيانة',
   'التبريد والكهرباء',
 ]
-const years = Array.from({ length: 29 }, (_, index) => String(2026 - index))
+const availableMakes = [...new Set(mockFitments.map((fitment) => fitment.make))]
 const formatNumber = (value) => new Intl.NumberFormat('ar-SA').format(value)
 
 function App() {
-  const [brand, setBrand] = useState('تويوتا')
-  const [model, setModel] = useState(modelsByBrand['تويوتا'][0])
-  const [year, setYear] = useState('2022')
+  const [brand, setBrand] = useState('')
+  const [model, setModel] = useState('')
+  const [year, setYear] = useState('')
   const [category, setCategory] = useState('الكل')
   const [query, setQuery] = useState('')
   const [selectedPart, setSelectedPart] = useState(null)
   const [submitted, setSubmitted] = useState(false)
   const [whatsappUrl, setWhatsappUrl] = useState('')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [resultsVisible, setResultsVisible] = useState(false)
+  const [activeFitment, setActiveFitment] = useState(null)
+  const availableModels = [
+    ...new Set(mockFitments.filter((fitment) => fitment.make === brand).map((fitment) => fitment.model)),
+  ]
+  const availableYears = mockFitments
+    .filter((fitment) => fitment.make === brand && fitment.model === model)
+    .map((fitment) => fitment.year)
+  const selectedFitment = mockFitments.find(
+    (fitment) => fitment.make === brand && fitment.model === model && fitment.year === year,
+  )
 
   useEffect(() => {
     if (!selectedPart) return undefined
@@ -272,7 +275,14 @@ function App() {
     }
   }, [selectedPart])
 
+  useEffect(() => {
+    if (resultsVisible) {
+      document.getElementById('parts')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [resultsVisible])
+
   const filteredParts = parts.filter((part) => {
+    const matchesVehicle = activeFitment?.partIds.includes(part.id) ?? false
     const matchesCategory = category === 'الكل' || part.category === category
     const normalizedQuery = query.trim().toLocaleLowerCase('ar')
     const matchesQuery =
@@ -280,13 +290,27 @@ function App() {
       `${part.title} ${part.english} ${part.code}`
         .toLocaleLowerCase('ar')
         .includes(normalizedQuery)
-    return matchesCategory && matchesQuery
+    return matchesVehicle && matchesCategory && matchesQuery
   })
 
   const openRequest = (part) => {
     setSelectedPart(part)
     setSubmitted(false)
     setWhatsappUrl('')
+  }
+
+  const searchParts = (event) => {
+    event.preventDefault()
+    if (!selectedFitment) return
+    setActiveFitment(selectedFitment)
+    setCategory('الكل')
+    setQuery('')
+    setResultsVisible(true)
+  }
+
+  const changeVehicle = () => {
+    setResultsVisible(false)
+    document.getElementById('vehicle-picker')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   const sendOrderRequest = (event) => {
@@ -304,7 +328,8 @@ function App() {
       `رابط الموقع: ${formData.get('locationLink') || 'غير مرفق'}`,
       '',
       'تفاصيل السيارة والقطعة',
-      `الشركة / الموديل / السنة: ${brand} / ${model} / ${year}`,
+      `الشركة / النوع / سنة الصنع: ${activeFitment.make} / ${activeFitment.model} / ${activeFitment.year}`,
+      'تنبيه: هذا سجل توافق تجريبي غير موثق ولا يؤكد الملاءمة الفعلية.',
       `اسم القطعة: ${selectedPart.title}`,
       `رقم القطعة: ${selectedPart.code}`,
       `السعر الاسترشادي: ${formatNumber(selectedPart.price)} ر.س`,
@@ -321,16 +346,16 @@ function App() {
       <div className="utility-bar">
         <div className="page-width utility-content">
           <span><MapPin size={14} /> الشحن إلى جميع مناطق المملكة</span>
-          <span>قطع أصلية لسيارتك الأمريكية</span>
+          <span>قطع أصلية لسيارتك</span>
           <a href="tel:+966582970043"><Phone size={14} /> +966 58 297 0043</a>
         </div>
       </div>
 
       <header className="site-header">
         <div className="page-width header-content">
-          <a className="brand-mark" href="#home" aria-label="رِفد، الصفحة الرئيسية">
+          <a className="brand-mark" href="#home" aria-label="قطع غيار السيارات، الصفحة الرئيسية">
             <span className="brand-symbol"><CarFront size={22} strokeWidth={2.2} /></span>
-            <span className="brand-name">رِفد<small>قطع أمريكية</small></span>
+            <span className="brand-name">قطع غيار السيارات</span>
           </a>
           <button
             className="mobile-menu-button icon-button"
@@ -342,7 +367,7 @@ function App() {
             {mobileMenuOpen ? <X size={21} /> : <Menu size={21} />}
           </button>
           <nav className={`main-nav ${mobileMenuOpen ? 'is-open' : ''}`} aria-label="القائمة الرئيسية">
-            <a className="nav-active" href="#parts" onClick={() => setMobileMenuOpen(false)}>قطع الغيار</a>
+            <a className="nav-active" href="#vehicle-picker" onClick={() => setMobileMenuOpen(false)}>اختر سيارتك</a>
             <a href="#why-us" onClick={() => setMobileMenuOpen(false)}>عن رِفد</a>
             <a href="#contact" onClick={() => setMobileMenuOpen(false)}>تواصل معنا</a>
           </nav>
@@ -351,68 +376,64 @@ function App() {
       </header>
 
       <main id="home">
-        <section className="hero-section">
-          <div className="page-width hero-content">
-            <div className="hero-copy">
-              <p className="eyebrow"><span /> قطع أمريكية، أقرب إليك</p>
-              <h1>قطعة سيارتك<br /><em>على الطريق.</em></h1>
-              <p className="hero-description">نوفر لك قطع غيار أصلية للسيارات الأمريكية، ونوصلها لباب بيتك في كل أنحاء السعودية.</p>
-              <a className="hero-link" href="#vehicle-picker">اختر سيارتك <ArrowLeft size={17} /></a>
-              <div className="hero-proof"><ShieldCheck size={17} /><span>قطع مضمونة <i /> شحن موثوق داخل المملكة</span></div>
-            </div>
-            <div className="hero-visual">
-              <img
-                src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1400&q=85"
-                alt="فني سيارات يفحص محرك سيارة في ورشة"
-              />
-              <div className="image-caption"><span className="caption-mark"><Check size={15} /></span><span><b>قطع أمريكية أصلية</b><small>اختيار يليق بسيارتك</small></span></div>
-              <span className="image-index">01 <i /> 04</span>
-            </div>
-          </div>
-          <div className="hero-bottom-rule" />
-        </section>
-
         <section className="catalog-section" id="vehicle-picker">
           <div className="page-width">
             <div className="section-heading">
               <div>
                 <p className="eyebrow section-eyebrow">ابدأ من هنا <span /></p>
                 <h2>اختر سيارتك</h2>
-                <p className="section-description">لنجد القطع المناسبة لموديلك بالضبط</p>
+                <p className="section-description">اختر تركيبة سيارة متاحة في بيانات العرض التجريبية</p>
               </div>
-              <div className="fitment-note"><ShieldCheck size={17} /><span>مطابقة دقيقة حسب السيارة</span></div>
+              <div className="fitment-note"><ShieldCheck size={17} /><span>خيارات المركبات التجريبية</span></div>
             </div>
 
-            <div className="vehicle-picker">
+            <form className="vehicle-picker" onSubmit={searchParts}>
               <label className="select-field">
                 <span>الشركة</span>
-                <span className="select-control"><select value={brand} onChange={(event) => { setBrand(event.target.value); setModel(modelsByBrand[event.target.value][0]) }} aria-label="اختر الشركة">
-                  {Object.keys(modelsByBrand).map((name) => <option key={name}>{name}</option>)}
+                <span className="select-control"><select value={brand} onChange={(event) => { setBrand(event.target.value); setModel(''); setYear('') }} aria-label="اختر الشركة" required>
+                  <option value="" disabled>اختر الشركة</option>
+                  {availableMakes.map((name) => <option key={name}>{name}</option>)}
                 </select><ChevronDown size={17} /></span>
               </label>
               <label className="select-field">
-                <span>الموديل</span>
-                <span className="select-control"><select value={model} onChange={(event) => setModel(event.target.value)} aria-label="اختر الموديل">
-                  {modelsByBrand[brand].map((name) => <option key={name}>{name}</option>)}
+                <span>النوع</span>
+                <span className="select-control"><select value={model} onChange={(event) => { setModel(event.target.value); setYear('') }} aria-label="اختر النوع" disabled={!brand} required>
+                  <option value="" disabled>اختر النوع</option>
+                  {availableModels.map((name) => <option key={name}>{name}</option>)}
                 </select><ChevronDown size={17} /></span>
               </label>
               <label className="select-field">
-                <span>سنة الصنع</span>
-                <span className="select-control"><select value={year} onChange={(event) => setYear(event.target.value)} aria-label="اختر سنة الصنع">
-                  {years.map((itemYear) => <option key={itemYear}>{itemYear}</option>)}
+                <span>الموديل / سنة الصنع</span>
+                <span className="select-control"><select value={year} onChange={(event) => setYear(event.target.value)} aria-label="اختر الموديل / سنة الصنع" disabled={!model} required>
+                  <option value="" disabled>اختر سنة الصنع</option>
+                  {availableYears.map((itemYear) => <option key={itemYear}>{itemYear}</option>)}
                 </select><ChevronDown size={17} /></span>
               </label>
-              <a className="find-parts-button" href="#parts">اعرض القطع <ArrowLeft size={17} /></a>
-            </div>
-            <div className="selected-vehicle"><CarFront size={16} /><span>سيارتك المحددة:</span><b>{brand} {model} {year}</b></div>
+              <button className="find-parts-button" type="submit">بحث عن القطع <ArrowLeft size={17} /></button>
+            </form>
+          </div>
+          <div className="page-width fitment-disclaimer" role="note">
+            <ShieldCheck size={15} />
+            <span>بيانات السيارات والقطع هنا تجريبية للتوضيح فقط، ولا تثبت التوافق الفعلي أو تصلح لتأكيد طلب شراء.</span>
           </div>
         </section>
 
+        {resultsVisible && (
         <section className="parts-section" id="parts">
           <div className="page-width">
+            <div className="vehicle-summary-bar" role="region" aria-label="ملخص السيارة المحددة">
+              <CarFront size={19} aria-hidden="true" />
+              <span className="vehicle-summary-item"><small>الشركة</small><b>{activeFitment.make}</b></span>
+              <span className="vehicle-summary-item"><small>النوع</small><b>{activeFitment.model}</b></span>
+              <span className="vehicle-summary-item"><small>الموديل / سنة الصنع</small><b>{activeFitment.year}</b></span>
+              <button type="button" className="change-vehicle-button" onClick={changeVehicle}>تغيير السيارة</button>
+            </div>
+            <div className="mock-fitment-notice" role="note">
+              بيانات توافق تجريبية لهذا العرض فقط؛ يجب التحقق من رقم الهيكل وكتالوج الشركة قبل الشراء.
+            </div>
             <div className="parts-heading">
               <div>
-                <p className="eyebrow section-eyebrow">مختارة لسيارتك <span /></p>
+                <p className="eyebrow section-eyebrow">نتائج البحث <span /></p>
                 <h2>قطع متوفرة <span className="part-count">{formatNumber(filteredParts.length)}</span></h2>
               </div>
               <label className="search-box">
@@ -462,6 +483,28 @@ function App() {
             <p className="catalog-footnote">الأسعار وأرقام القطع استرشادية؛ يُرجى تأكيد السعر والتوافق حسب الموديل والفئة ورقم الهيكل.</p>
           </div>
         </section>
+        )}
+
+        <section className="hero-section">
+          <div className="page-width hero-content">
+            <div className="hero-copy">
+              <p className="eyebrow"><span /> قطع أصلية، أقرب إليك</p>
+              <h1>قطعة سيارتك<br /><em>على الطريق.</em></h1>
+              <p className="hero-description">نوفر لك قطع غيار أصلية، ونوصلها لباب بيتك في كل أنحاء السعودية.</p>
+              <a className="hero-link" href="#vehicle-picker">اختر سيارتك <ArrowLeft size={17} /></a>
+              <div className="hero-proof"><ShieldCheck size={17} /><span>قطع مضمونة <i /> شحن موثوق داخل المملكة</span></div>
+            </div>
+            <div className="hero-visual">
+              <img
+                src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1400&q=85"
+                alt="فني سيارات يفحص محرك سيارة في ورشة"
+              />
+              <div className="image-caption"><span className="caption-mark"><Check size={15} /></span><span><b>قطع أصلية</b><small>اختيار يليق بسيارتك</small></span></div>
+              <span className="image-index">01 <i /> 04</span>
+            </div>
+          </div>
+          <div className="hero-bottom-rule" />
+        </section>
 
         <section className="trust-strip" id="why-us">
           <div className="page-width trust-content">
@@ -491,10 +534,11 @@ function App() {
               <div className="success-state"><span className="success-icon"><Check size={28} /></span><p className="eyebrow section-eyebrow">تم تجهيز طلبك</p><h2 id="modal-title">طلبك جاهز في واتساب</h2><p>فتحنا محادثة مع رِفد برسالة طلبك. راجع التفاصيل في واتساب واضغط إرسال لإكمال الطلب.</p><a className="find-parts-button" href={whatsappUrl} target="_blank" rel="noreferrer">فتح واتساب لإرسال الطلب <ArrowLeft size={17} /></a><button type="button" className="success-return" onClick={() => setSelectedPart(null)}>العودة إلى القطع</button></div>
             ) : (
               <>
-                <p className="eyebrow section-eyebrow">طلب قطعة <span /></p>
+                <p className="eyebrow section-eyebrow">طلب قطعة تجريبية <span /></p>
                 <h2 id="modal-title">خلّنا نرتب طلبك</h2>
                 <p className="modal-intro">سجّل بياناتك ونتواصل معك لتأكيد التوفر والتوصيل.</p>
-                <div className="modal-part"><span className={`part-art ${selectedPart.tone}`}><selectedPart.icon size={24} /></span><span><b>{selectedPart.title}</b><small>{brand} {model} {year} · {formatNumber(selectedPart.price)} ر.س</small></span></div>
+                <p className="mock-fitment-notice" role="note">بيانات التوافق في هذا الموقع تجريبية وغير موثقة. لا تعتمد عليها لتأكيد شراء أو ملاءمة القطعة.</p>
+                <div className="modal-part"><span className={`part-art ${selectedPart.tone}`}><selectedPart.icon size={24} /></span><span><b>{selectedPart.title}</b><small>{activeFitment.make} {activeFitment.model} {activeFitment.year} · {formatNumber(selectedPart.price)} ر.س</small></span></div>
                 <form className="request-form" onSubmit={sendOrderRequest}>
                   <label>الاسم الكامل<input name="name" autoComplete="name" placeholder="الاسم الكامل" required /></label>
                   <label>رقم الجوال<input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="05xxxxxxxx" pattern="[0-9+٠-٩\s\-]{8,15}" required /></label>
